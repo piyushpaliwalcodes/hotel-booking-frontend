@@ -1,13 +1,34 @@
 import { Link } from "react-router-dom";
 import * as apiClient from "../api-client";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { BsBuilding, BsMap } from "react-icons/bs";
 import { BiHotel, BiMoney, BiStar } from "react-icons/bi";
+import { useAppContext } from "../contexts/AppContext";
+import { useEffect } from "react";
 const MyHotels = () => {
-  const { data: hotelData } = useQuery(
+  const { showToast } = useAppContext();
+  const { mutate, isLoading } = useMutation(apiClient.deleteMyHotel, {
+    onSuccess: () => {
+      showToast({ message: "Hotel deleted successfully", type: "SUCCESS" });
+      refetch();
+    },
+    onError: (error: any) => {
+      showToast({ message: `Deletion error ${error}`, type: "ERROR" });
+    },
+  });
+
+  const handleDelete = (hotelId: string) => {
+    mutate(hotelId);
+  };
+
+  const { data: hotelData, refetch } = useQuery(
     "fetchMyHotels",
     apiClient.fetchMyHotels,
-    { onError: () => {} }
+    {
+      onError: () => {
+        handleDelete;
+      },
+    }
   );
   if (!hotelData) {
     return <span>NO HOTELS FOUND</span>;
@@ -50,13 +71,19 @@ const MyHotels = () => {
                 {hotel.starRating}
               </div>
             </div>
-            <span className="flex justify-end  ">
+            <span className="flex justify-end gap-2 ">
               <Link
                 to={`/edit-hotel/${hotel._id}`}
                 className="flex bg-blue-600 text-white text-xl fong-bold p-2 hover:bg-blue-300"
               >
                 View Details
               </Link>
+              <button
+                className="flex bg-blue-600 text-white text-xl fong-bold p-2 hover:bg-blue-300"
+                onClick={() => handleDelete(hotel._id)}
+              >
+                Delete
+              </button>
             </span>
           </div>
         ))}
