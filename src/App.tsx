@@ -10,6 +10,7 @@ import Search from "./pages/Search";
 import Detail from "./pages/Detail";
 import Booking from "./pages/Booking";
 import Myhotelbookings from "./pages/Myhotelbookings";
+import HomePage from "./pages/HomePage";
 
 function App() {
   const { isLoggedIn } = useAppContext();
@@ -19,8 +20,8 @@ function App() {
         <Route
           path="/"
           element={
-            <Layout>
-              <h1>HOME PAGE</h1>
+            <Layout  >
+              <HomePage />
             </Layout>
           }
         />
