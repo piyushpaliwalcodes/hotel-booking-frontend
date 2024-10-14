@@ -19,7 +19,7 @@ const Detail = () => {
     return <h3>HOTEL NOT FOUND</h3>;
   }
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-white rounded-md p-2">
       <div>
         <span className="flex flex-row">
           {[1, 2, 3, 4, 5].map((i) =>

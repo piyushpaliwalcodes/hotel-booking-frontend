@@ -16,7 +16,7 @@ const Myhotelbookings = () => {
   if (!hotelData) return <>No hotel data found</>;
 
   return (
-    <div className=" border rounded-md p-2 ">
+    <div className=" border rounded-md p-2 bg-white">
       {hotelData.map((hotel) => (
         <div className="grid grid-cols-2 items-center justify-between ">
           <div>

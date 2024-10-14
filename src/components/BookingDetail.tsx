@@ -26,7 +26,7 @@ const BookingDetail = ({
     },
   });
   return (
-    <div className="grid grid-cols-1 justify-center items-center p-2">
+    <div className="grid grid-cols-1 justify-center items-center p-2 bg-white">
       <h3 className="font-bold text-lg ">YOUR BOOKING DETAILS</h3>
       <div>
         Location:

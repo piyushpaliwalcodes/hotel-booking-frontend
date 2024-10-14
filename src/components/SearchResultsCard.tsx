@@ -23,7 +23,7 @@ const renderStars = (rating: number) => {
 
 const SearchResultsCard = ({ hotel }: Props) => {
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] border border-slate-500 rounded-md p-3 ">
+    <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] border border-slate-500 rounded-md p-3 bg-white">
       <div className="w-full h-[300px] mr-2">
         <img
           className="w-full h-full  object-cover object-center"

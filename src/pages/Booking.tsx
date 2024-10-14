@@ -58,7 +58,7 @@ const Booking = () => {
   if (!hotelData) return <></>;
   console.log("HOTEL DATA", hotelData);
   return (
-    <div className="grid grid-cols-[1fr_2fr]">
+    <div className="grid grid-cols-[1fr_2fr] bg-white rounded-md p-2">
       <div className="border border-slate-300 mr-2 rounded-lg">
         <BookingDetail
           hotelData={hotelData}
