@@ -4,6 +4,8 @@ import { MdTravelExplore } from "react-icons/md";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import { useNavigate } from "react-router-dom";
+import * as apiClient from "../api-client";
+import { validateToken } from "../api-client";
 const SearchBar = () => {
   const search = useSearchContext();
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ const SearchBar = () => {
   const [adultCount, setAdultCount] = useState<number>(search.adultCount);
   const [childCount, setChildCount] = useState<number>(search.childCount);
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     console.log("AT HANLDE SUBMIT");
     search.saveSearchValues(
@@ -23,7 +25,12 @@ const SearchBar = () => {
       adultCount,
       childCount
     );
-    navigate("/search");
+    try {
+      await apiClient.validateToken();
+      navigate("/search");
+    } catch (error) {
+      navigate("/sign-in");
+    }
   };
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 1);

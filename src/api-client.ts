@@ -2,6 +2,7 @@ import { useAppContext } from "./contexts/AppContext";
 import { BookingFormData } from "./forms/BookingForm/BookingForm";
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/Signin";
+import { useNavigate } from "react-router-dom";
 import {
   BookingType,
   HotelSearchResponse,
@@ -44,6 +45,7 @@ export const validateToken = async () => {
   });
   console.log(response);
   if (!response.ok) {
+    console.log("HERROE");
     throw new Error("Token Invalid");
   }
   return response.json();
