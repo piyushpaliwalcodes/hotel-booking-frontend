@@ -45,11 +45,16 @@ const MyHotels = () => {
           Add Hotel
         </Link>
       </span>
-      <div className="grid grid-cols-1 gap-8">
+      <div className="grid grid-cols-1 gap-2">
         {hotelData?.map((hotel) => (
-          <div className="flex flex-col justify-between border border-slate-300 rounded-lg p-8 gap-5">
-            <h2 className="text-2xl font-bold ">{hotel.name}</h2>
-            <div className="whitespace-pre-line">{hotel.description}</div>
+          <div className="flex flex-col justify-between border border-slate-300 rounded-lg p-3 gap-1">
+            <div className="flex flex-row h-[20%] gap-3">
+              {hotel.imageUrls.map((url) => (
+                <img className="" src={url} alt={hotel.name} />
+              ))}
+            </div>
+            <h2 className="text-2xl font-bold">{hotel.name}</h2>
+            <div className="whitespace-pre-line ">{hotel.description}</div>
             <div className="grid grid-cols-3 md:grid-cols-5 gap-2">
               <div className="border border-slate-300 rounded-sm p-2 flex items-center justify-center whitespace-nowrap">
                 <BsMap className="mr-1" />

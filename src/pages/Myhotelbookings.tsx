@@ -16,33 +16,42 @@ const Myhotelbookings = () => {
   if (!hotelData) return <>No hotel data found</>;
 
   return (
-    <div className="flex flex-col">
+    <div className=" border rounded-md p-2 ">
       {hotelData.map((hotel) => (
-        <div className="border rounded-md p-2 ">
-          <h3 className="my-0">{hotel.name}</h3>
-          <span className="text-sm my-0">
-            {hotel.city},{hotel.country}
-          </span>
-          {hotel.bookings.map((booking) => (
-            <div className="details my-2 ">
-              <div className="date ">
-                <span className="font-bold">Dates:</span>
-                <span>
-                  {day(new Date(booking.checkIn))},
-                  {new Date(booking.checkIn).toLocaleDateString()}-
-                  {day(new Date(booking.checkOut))},
-                  {new Date(booking.checkOut).toLocaleDateString()}
-                </span>
-              </div>
-              <div className="Guests ">
-                <span className="font-bold">Guests:</span>
-                <span>
-                  {`${booking.adultCount} Adults,
+        <div className="grid grid-cols-2 items-center justify-between ">
+          <div>
+            <img
+              src={hotel.imageUrls[0]}
+              alt={hotel.name}
+              className="object-cover h-[90%]"
+            />
+          </div>
+          <div>
+            <h3 className="my-0 font-bold underline text-xl">{hotel.name}</h3>
+            <span className="text-sm my-0">
+              {hotel.city},{hotel.country}
+            </span>
+            {hotel.bookings.map((booking) => (
+              <div className="details my-2 ">
+                <div className="date ">
+                  <span className="font-bold">Dates:</span>
+                  <span>
+                    {day(new Date(booking.checkIn))},
+                    {new Date(booking.checkIn).toLocaleDateString()}-
+                    {day(new Date(booking.checkOut))},
+                    {new Date(booking.checkOut).toLocaleDateString()}
+                  </span>
+                </div>
+                <div className="Guests ">
+                  <span className="font-bold">Guests:</span>
+                  <span>
+                    {`${booking.adultCount} Adults,
                   ${booking.childCount} Children`}
-                </span>
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       ))}
     </div>
