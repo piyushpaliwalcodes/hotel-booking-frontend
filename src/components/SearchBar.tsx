@@ -25,6 +25,7 @@ const SearchBar = () => {
       adultCount,
       childCount
     );
+
     try {
       await apiClient.validateToken();
       navigate("/search");
@@ -35,6 +36,21 @@ const SearchBar = () => {
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 1);
 
+  const handleClear = (event: FormEvent) => {
+    event.preventDefault();
+    // Reset form state
+    setDestination("");
+    setCheckIn(new Date());
+    setCheckOut(new Date());
+    setAdultCount(1);
+    setChildCount(0);
+
+    // Clear session storage
+    sessionStorage.clear();
+
+    // Clear values in the context (SearchContext)
+    search.saveSearchValues("", new Date(), new Date(), 1, 0);
+  };
   return (
     <form
       onSubmit={handleSubmit}
@@ -110,10 +126,16 @@ const SearchBar = () => {
         />
       </div>
       <div className="flex gap-1">
-        <button className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500">
+        <button
+          type="submit"
+          className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500"
+        >
           Search
         </button>
-        <button className="w-2/3 bg-red-600 text-white h-full p-2 font-bold text-xl hover:bg-red-500">
+        <button
+          onClick={(event) => handleClear(event)}
+          className="w-2/3 bg-red-600 text-white h-full p-2 font-bold text-xl hover:bg-red-500"
+        >
           Clear
         </button>
       </div>
